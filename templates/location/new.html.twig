@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Location{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_location_index') }}" class="btn btn-sm btn-outline-secondary">back to list</a>
+    <h1 class="mt-3">Create new Location</h1>
+
+    {{ include('location/_form.html.twig') }}
+{% endblock %}

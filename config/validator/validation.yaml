@@ -1,0 +1,90 @@
+# Z tą częścią zadania pomógł mi Google Gemini.
+
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank:
+                message: 'Nazwa miasta jest wymagana.'
+                groups: ['location', 'Default']
+        country:
+            - NotBlank:
+                  message: 'Wybór kraju jest wymagany.'
+                  groups: ['location', 'Default']
+            - Country:
+                  message: 'Wybierz poprawny kod kraju.'
+                  groups: ['location', 'Default']
+        latitude:
+            - NotBlank:
+                  message: 'Szerokość geograficzna jest wymagana.'
+                  groups: ['location', 'Default']
+            - Range:
+                  min: -90.0
+                  max: 90.0
+                  notInRangeMessage: 'Szerokość geograficzna musi mieścić się w przedziale od {{ min }} do {{ max }}.'
+                  groups: ['location', 'Default']
+
+        longitude:
+            - NotBlank:
+                  message: 'Długość geograficzna jest wymagana.'
+                  groups: ['location', 'Default']
+            - Range:
+                  min: -180.0
+                  max: 180.0
+                  notInRangeMessage: 'Długość geograficzna musi mieścić się w przedziale od {{ min }} do {{ max }}.'
+                  groups: ['location', 'Default']
+
+App\Entity\Forecast:
+    properties:
+        date:
+            - NotBlank:
+                    message: 'Data prognozy jest wymagana.'
+                    groups: [ 'forecast', 'Default' ]
+            - Type:
+                    type: \DateTimeInterface
+                    message: 'Wartość musi być poprawną datą.'
+                    groups: [ 'forecast', 'Default' ]
+
+        temperature:
+            - NotBlank:
+                  message: 'Temperatura jest wymagana.'
+                  groups: ['forecast', 'Default']
+            - Range:
+                  min: -50.0
+                  max: 50.0
+                  notInRangeMessage: 'Temperatura musi mieścić się w przedziale od {{ min }}°C do {{ max }}°C.'
+                  groups: ['forecast', 'Default']
+
+        wind:
+            - NotBlank:
+                  message: 'Prędkość wiatru jest wymagana.'
+                  groups: ['forecast', 'Default']
+            - Range:
+                  min: 0.0
+                  max: 500.0
+                  notInRangeMessage: 'Prędkość wiatru musi mieścić się w przedziale od {{ min }} do {{ max }}.'
+                  groups: ['forecast', 'Default']
+
+        feelsLike:
+            - NotBlank:
+                  message: 'Temperatura odczuwalna jest wymagana.'
+                  groups: ['forecast', 'Default']
+            - Range:
+                  min: -50.0
+                  max: 50.0
+                  notInRangeMessage: 'Temperatura odczuwalna musi mieścić się w przedziale od {{ min }}°C do {{ max }}°C.'
+                  groups: ['forecast', 'Default']
+
+        cloudiness:
+            - NotBlank:
+                  message: 'Zachmurzenie jest wymagane.'
+                  groups: ['forecast', 'Default']
+            - Range:
+                  min: 0.0
+                  max: 100.0
+                  notInRangeMessage: 'Zachmurzenie musi być wartością procentową od {{ min }}% do {{ max }}%.'
+                  groups: ['forecast', 'Default']
+
+        location:
+            - NotBlank:
+                  message: 'Wybór lokalizacji jest wymagany.'
+                  groups: ['forecast', 'Default']
