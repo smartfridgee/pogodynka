@@ -57,7 +57,9 @@
 {% block body %}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Forecast index</h1>
+        {% if is_granted('ROLE_FORECAST_NEW') %}
         <a href="{{ path('app_forecast_new') }}" class="btn btn-primary">Create new</a>
+        {% endif %}
     </div>
 
     <table class="table align-middle table-mobile-cards">
@@ -83,8 +85,12 @@
                 <td data-label="Cloudiness">{{ forecast.cloudiness }}</td>
                 <td data-label="Actions">
                     <div class="d-flex gap-2 justify-content-end">
-                    <a href="{{ path('app_forecast_show', {'id': forecast.id}) }}" class="btn btn-sm btn-outline-secondary">show</a>
-                    <a href="{{ path('app_forecast_edit', {'id': forecast.id}) }}" class="btn btn-sm btn-outline-primary">edit</a>
+                        {% if is_granted('ROLE_FORECAST_SHOW') %}
+                        <a href="{{ path('app_forecast_show', {'id': forecast.id}) }}" class="btn btn-sm btn-outline-secondary">show</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_FORECAST_EDIT') %}
+                        <a href="{{ path('app_forecast_edit', {'id': forecast.id}) }}" class="btn btn-sm btn-outline-primary">edit</a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>
